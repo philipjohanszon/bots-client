@@ -11,8 +11,8 @@ import (
 
 var (
 	networkConfig = _config.NetworkConfig{
-		MasterURL: "https://localhost:3000",
-		Timer:     time.Second * 2,
+		MasterURL: "url",
+		Timer:     time.Second * 3,
 	}
 
 	config = _config.Config{
