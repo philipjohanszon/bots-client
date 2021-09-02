@@ -17,9 +17,7 @@ type Network struct {
 
 //loops through with the speed set by the duration and sends healthcheck to the server and also gets command/config update data
 func (network *Network) Start() {
-	fmt.Printf("hey")
 	for true {
-		fmt.Printf("hey")
 		go network.getUpdate()
 		time.Sleep(network.Config.NetworkConfig.Timer)
 	}
