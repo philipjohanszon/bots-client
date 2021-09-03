@@ -1,2 +1,3 @@
 # bots
-A golang computer handler
+
+This software is for educational purposes only
