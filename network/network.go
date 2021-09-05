@@ -15,6 +15,12 @@ type Network struct {
 	Config config.Config
 }
 
+type ResponseData struct {
+	Commands      []string             `json:"commands"`
+	ConfigUpdates config.Config        `json:"configUpdates"`
+	VersionUpdate config.VersionUpdate `json:"versionUpdate"`
+}
+
 //loops through with the speed set by the duration and sends healthcheck to the server and also gets command/config update data
 func (network *Network) Start() {
 	for true {
@@ -41,6 +47,19 @@ func (network *Network) getUpdate() {
 
 	defer response.Body.Close()
 
+	jsonDecoder := json.NewDecoder(response.Body)
+	var responseData ResponseData
+
+	decodeError := jsonDecoder.Decode(&responseData)
+
+	if decodeError != nil {
+		fmt.Println(decodeError.Error())
+		return
+	}
+
+	fmt.Printf("data")
+	fmt.Printf("%#v\n", responseData)
+
 }
 
 /*Creating the data that will be sent to the server
@@ -59,6 +78,7 @@ func (network *Network) getUpdate() {
 */
 
 type JSONData struct {
+	Id      string `json:"id"`
 	Version string `json:"version"`
 	Ip      string `json:"ip"`
 	// MacAdress string        `json:"macAdress"`
@@ -69,6 +89,7 @@ func createJSONData(configStruct *config.Config) (*[]byte, error) {
 
 	data := JSONData{}
 	data.Config = *configStruct
+	data.Id = "none"
 
 	//Need to get version, Ip and MAC Adress
 	data.Version = configStruct.Version

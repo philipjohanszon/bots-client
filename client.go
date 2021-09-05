@@ -10,7 +10,7 @@ import (
 
 var (
 	networkConfig = _config.NetworkConfig{
-		MasterURL: "https://localhost:3000",
+		MasterURL: "http://localhost:3000",
 		Timer:     time.Second * 2,
 	}
 
@@ -29,5 +29,4 @@ func main() {
 	wg.Add(1)
 	go network.Start()
 	wg.Wait()
-
 }

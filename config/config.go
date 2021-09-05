@@ -6,6 +6,7 @@ import (
 )
 
 type Config struct {
+	Id            string        `json:"id"`
 	Version       string        `json:"version"`
 	NetworkConfig NetworkConfig `json:"networkConfig"`
 }
@@ -19,6 +20,11 @@ type ConfigUpdate struct {
 type NetworkConfig struct {
 	Timer     time.Duration `json:"networkTimer"`
 	MasterURL string        `json:"masterUrl"`
+}
+
+type VersionUpdate struct {
+	Update bool   `json:"update"`
+	Url    string `json:"url"`
 }
 
 func (config *Config) SaveConfig() error {
